@@ -24,4 +24,6 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "firebase-admin": "^6.5.0",
-    "fireba
+    "firebase-functions": "^2.1.0"
+  }
+}
