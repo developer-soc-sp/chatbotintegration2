@@ -32,7 +32,8 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
         });
     
         var params = {
-            url: "https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/apple/apple-iphone-x/silver/Apple-iPhoneX-Silver-1-3x.jpg"
+            //url: "https://www.t-mobile.com/content/dam/t-mobile/en-p/cell-phones/apple/apple-iphone-x/silver/Apple-iPhoneX-Silver-1-3x.jpg"
+            url: agent.parameters.url
         };
     
         return new Promise((resolve,reject)=>{
