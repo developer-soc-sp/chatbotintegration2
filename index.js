@@ -43,12 +43,12 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                 //Store the response into a string
                 var result = JSON.stringify(response, null, 2);
                 var class_col = response.images[0].classifiers[0].classes;
-                var i=0;
+                var i=0, str ="";
                 for (i = 0; i < class_col.length; i++) {
-                    //res.write(class_col[i].class + "\t");
-                    //res.write(class_col[i].score + "\n");
+                    str += class_col[i].class + " :";
+                    str += class_col[i].score + "\n ";
                 }
-                //res.end("END");
+                agent.add(str);
                 console.log(result);
     
             }
