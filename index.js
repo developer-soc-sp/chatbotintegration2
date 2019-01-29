@@ -98,7 +98,17 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                 var str = "You sound ";
                 tones.forEach(tone=>{
                     if(tone.score > 0.5){
-                        str + tone_name;
+                        //str + tone_name;
+                        switch(String(tone.tone_name.toUpperCase())){
+                            case "JOY":
+                                str += "happy ";
+                                break;
+                            case "SADNESS":
+                                str += "sad ";
+                                break;
+                            default:
+                                str +=tone.tone_name + " ";
+                        }
                     }
                 });
                 str +=".";
