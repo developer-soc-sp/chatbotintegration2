@@ -102,6 +102,7 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                         switch(String(tone.tone_name.toUpperCase())){
                             case "JOY":
                                 str += "happy ";
+                                params.url = 'https://davidjrodger.files.wordpress.com/2015/07/positive-thinking-starts-with-a-smile-and-continues-with-a-good-book-david-j-rodger.jpg';
                                 break;
                             case "SADNESS":
                                 str += "sad ";
@@ -112,7 +113,11 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                     }
                 });
                 str +=".";
-                agent.add(str);
+                agent.add(new Card({
+                    title: "Image Details",
+                    imageUrl: params.url,
+                    text: str
+                }));
                 console.log(result);
                 resolve("Good");
             }
