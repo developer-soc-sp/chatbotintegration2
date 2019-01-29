@@ -75,8 +75,7 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
     function testTone(agent) {
         var toneAnalyzer = new ToneAnalyzerV3({
             version: '2017-09-21',
-            iam_apikey: 'vB2FIJyVvBuJigW_F0Pu-zm3QyS5uq2fKqms-Pj2EcWa',
-            url: 'https://gateway.watsonplatform.net/tone-analyzer/api'
+            iam_apikey: 'vB2FIJyVvBuJigW_F0Pu-zm3QyS5uq2fKqms-Pj2EcWa'
           });
         var text = agent.parameters.myText;
         var params = {
