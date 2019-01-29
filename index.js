@@ -49,8 +49,11 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                 class_col.sort(function(a,b){return b.score > a.score;});
                 var i=0, str ="";
                 for (i = 0; i < class_col.length; i++) {
-                    str += class_col[i].class + " :";
-                    str += class_col[i].score + "\n ";
+                    if( class_col[i].score > 0.8 && 
+                        class_col[i].type_hierarchy !=null){//show iff score > 0.8
+                        str += class_col[i].class + " :";
+                        str += class_col[i].score + "\n ";
+                    }
                 }
                 //agent.add(str);
                 agent.add(new Card({
