@@ -93,7 +93,16 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
             else {
                 //Store the response into a string
                 var result = JSON.stringify(response, null, 2);
-                agent.add(result);
+                var tones = response.document_tones.tones;
+                tones.sort(function(a,b){return b.score - a.score;});
+                var str = "You sound ";
+                tones.forEach(tone=>{
+                    if(tone.score > 0.5){
+                        str + tone_name;
+                    }
+                });
+                str +=".";
+                agent.add(str);
                 console.log(result);
                 resolve("Good");
             }
