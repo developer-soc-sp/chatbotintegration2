@@ -7,7 +7,7 @@ const { WebhookClient, Card, Suggestion } = require('dialogflow-fulfillment');
 const { dialogflow } = require('actions-on-google');
 var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
 var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
-
+var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 
 const app = dialogflow();
 process.env.DEBUG = 'dialogflow:debug'; // enables lib debugging statements
@@ -72,11 +72,40 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
         agent.add(`I am alive!!!`);
         
     }
+    function testTone(agent) {
+        var toneAnalyzer = new ToneAnalyzerV3({
+            version: '2017-09-21',
+            iam_apikey: 'vB2FIJyVvBuJigW_F0Pu-zm3QyS5uq2fKqms-Pj2EcWa',
+            url: 'https://gateway.watsonplatform.net/tone-analyzer/api'
+          });
+        var text = agent.parameters.myText;
+        var params = {
+            'tone_input': text, 
+            'content_type': 'application/json'
+        };
+    
+        return new Promise((resolve,reject)=>{
+            toneAnalyzer.tone(params, function (err, response) {
+            if (err){
+                console.log(err);
+                reject("Bad");
+            }
+            else {
+                //Store the response into a string
+                var result = JSON.stringify(response, null, 2);
+                agent.add(result);
+                console.log(result);
+                resolve("Good");
+            }
+        });
+        });        
+    }
     // Run the proper function handler based on the matched Dialogflow intent name
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
     intentMap.set('Default Fallback Intent', fallback);
     intentMap.set('GetImageDetailIntent', testImage);
+    intentMap.set('ConversationIntent', testTone);
     // intentMap.set('your intent name here', googleAssistantHandler);
     agent.handleRequest(intentMap);
 });
