@@ -51,7 +51,12 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                     str += class_col[i].class + " :";
                     str += class_col[i].score + "\n ";
                 }
-                agent.add(str);
+                //agent.add(str);
+                agent.add(new Card({
+                    title: "Image Details",
+                    imageUrl: params.url,
+                    text: str
+                }));
                 console.log(result);
                 resolve("Good");
             }
