@@ -46,6 +46,7 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                 //Store the response into a string
                 var result = JSON.stringify(response, null, 2);
                 var class_col = response.images[0].classifiers[0].classes;
+                class_col.sort(function(a,b){return b.score > a.score;});
                 var i=0, str ="";
                 for (i = 0; i < class_col.length; i++) {
                     str += class_col[i].class + " :";
