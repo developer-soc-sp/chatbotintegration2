@@ -37,8 +37,10 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
     
         return new Promise((resolve,reject)=>{
             visualRecognition.classify(params, function (err, response) {
-            if (err)
+            if (err){
                 console.log(err);
+                reject("Bad");
+            }
             else {
                 //Store the response into a string
                 var result = JSON.stringify(response, null, 2);
@@ -50,7 +52,7 @@ app.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response
                 }
                 agent.add(str);
                 console.log(result);
-    
+                resolve("Good");
             }
         });
         });
